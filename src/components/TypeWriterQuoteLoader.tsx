@@ -1,31 +1,59 @@
-// QuoteLoader.tsx
-import React, {useEffect, useState} from 'react';
-import './QuoteLoader.css';
+import React, { useEffect, useState } from 'react';
 
 interface Props {
-  quote: string;
+  quote: { text: string; author: string };
 }
+
+const TYPING_SPEED_MS = 50;
 
 export const TypeWriterQuoteLoader: React.FC<Props> = ({ quote }) => {
   const [visibleChars, setVisibleChars] = useState(0);
+  const [visibleAuthorChars, setVisibleAuthorChars] = useState(0);
+  const [textTypingComplete, setTextTypingComplete] = useState(false);
 
   useEffect(() => {
     setVisibleChars(0);
-    const interval = setInterval(() => {
+    setVisibleAuthorChars(0);
+    setTextTypingComplete(false);
+
+    const textInterval = setInterval(() => {
       setVisibleChars((prev) => {
-        if (prev >= quote.length) {
-          clearInterval(interval);
+        if (prev >= quote.text.length) {
+          clearInterval(textInterval);
+          setTextTypingComplete(true);
           return prev;
         }
         return prev + 1;
       });
-    }, 50);
-    return () => clearInterval(interval);
+    }, TYPING_SPEED_MS);
+
+    return () => clearInterval(textInterval);
   }, [quote]);
+
+  useEffect(() => {
+    if (textTypingComplete && quote?.author) {
+      const authorInterval = setInterval(() => {
+        setVisibleAuthorChars((prev) => {
+          if (prev >= quote?.author.length) {
+            clearInterval(authorInterval);
+            return prev;
+          }
+          return prev + 1;
+        });
+      }, TYPING_SPEED_MS);
+
+      return () => clearInterval(authorInterval);
+    }
+  }, [textTypingComplete, quote.author]);
 
   return (
     <>
-      ❝ {quote.slice(0, visibleChars)} ❞
+      ❝ {quote.text.slice(0, visibleChars)} ❞
+      {textTypingComplete && quote.author && (
+        <p className="quote-author">
+          – {quote.author.slice(0, visibleAuthorChars)}
+        </p>
+      )}
     </>
   );
 };

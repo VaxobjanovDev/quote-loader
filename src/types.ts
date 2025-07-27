@@ -1,12 +1,15 @@
+import { quoteData } from "./constants/quotes";
 
-export type AnimationType = 'fade' | 'slide' | 'typewriter';
-export type QuoteCategory = 'motivational' | 'funny';
+export interface Quote {
+  text: string;
+  author: string;
+}
 
 export interface QuoteLoaderProps {
-  animation?: AnimationType;
+  animation?: 'typewriter' | 'fade' | 'slide';
   interval?: number;
-  category: QuoteCategory;
-  customQuotes?: string[];
+  category?: keyof typeof quoteData;
+  customQuotes?: Quote[];
   avatarUrl?: string;
   className?: string;
 }

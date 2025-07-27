@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {quoteData} from '../constants/quotes';
 import './QuoteLoader.css';
 import type {QuoteLoaderProps} from "../types.ts";
-import {TypeWriterQuoteLoader} from "./TypeWriterQuoteLoader.tsx";
+import {TypeWriterQuoteLoader} from "./TypeWriterQuoteLoader";
 
 export const QuoteLoader: React.FC<QuoteLoaderProps> = ({
-                                                          animation = 'typewriter',
+                                                          animation = 'fade',
                                                           interval = 5000,
-                                                          category = 'funny',
+                                                          category = 'motivational',
                                                           customQuotes,
                                                           avatarUrl,
                                                           className,
@@ -30,7 +30,14 @@ export const QuoteLoader: React.FC<QuoteLoaderProps> = ({
         )}
         {animation === 'typewriter' ? (
           <TypeWriterQuoteLoader quote={quotes[index]}/>
-        ) : (<p className="quote-text">{quotes[index]}</p>)}
+        ) : (
+          <>
+            <p className="quote-text">{quotes[index].text}</p>
+            {quotes[index]?.author && (
+              <p className="quote-author">– {quotes[index]?.author}</p>
+            )}
+          </>
+          )}
       </div>
     </div>
   );

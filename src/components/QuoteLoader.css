@@ -50,6 +50,15 @@
   margin-right: 4px;
 }
 
+.quote-author {
+  text-align: right;
+  font-style: italic;
+  color: #666;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  width: 80%;
+}
+
 .quote-text::after {
   content: '❞';
   font-size: 1.5rem;
