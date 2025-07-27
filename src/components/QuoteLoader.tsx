@@ -11,16 +11,19 @@ export const QuoteLoader: React.FC<QuoteLoaderProps> = ({
                                                           customQuotes,
                                                           avatarUrl,
                                                           className,
+                                                          onQuotesChange,
                                                         }) => {
   const quotes = customQuotes || quoteData[category];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % quotes.length);
+      const quoteIndex = (index + 1) % quotes.length;
+      onQuotesChange?.(quotes[quoteIndex]);
+      setIndex(quoteIndex);
     }, interval);
     return () => clearInterval(timer);
-  }, [interval, quotes.length]);
+  }, [interval, onQuotesChange, quotes.length]);
 
   return (
     <div className="loader-wrapper">
@@ -37,7 +40,7 @@ export const QuoteLoader: React.FC<QuoteLoaderProps> = ({
               <p className="quote-author">– {quotes[index]?.author}</p>
             )}
           </>
-          )}
+        )}
       </div>
     </div>
   );
