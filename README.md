@@ -1,34 +1,59 @@
+# 📜 Quote Loader
 
-# Quote Loader
+A customizable React component that displays rotating quotes with animations and optional avatars — perfect for splash/loading screens or inspirational widgets.
 
-A customizable React component that displays rotating quotes with animations and optional avatars during loading screens.
-
-## Installation
+## 🚀 Installation
 
 ```bash
 npm install quote-loader
 ```
 
-## Usage
+## 🧠 Usage
 
 ```tsx
 import { QuoteLoader } from 'quote-loader';
 
-<QuoteLoader 
-  animation="fade" 
-  interval={3000} 
-  category="funny" 
+<QuoteLoader
+  animation="typewriter"
+  interval={4000}
+  category="funny"
   avatarUrl="/avatar.png"
 />
 ```
 
-## Props
+## 🛠️ Props
 
-| Prop          | Type                  | Default         | Description |
-|---------------|-----------------------|-----------------|-------------|
-| `animation`   | `"fade" | "slide" | "typewriter"` | `"fade"` | Quote change animation |
-| `interval`    | `number`              | `4000`          | Milliseconds between quote changes |
-| `category`    | `"motivational" | "funny"`        | `"motivational"` | Quote category |
-| `customQuotes`| `string[]`            | `undefined`     | Use your own quotes |
-| `avatarUrl`   | `string`              | `undefined`     | Avatar image URL |
-| `className`   | `string`              | `""`            | Optional custom styles |
+| Prop           | Type                                                                      | Default          | Description                              |
+| -------------- | ------------------------------------------------------------------------- | ---------------- | ---------------------------------------- |
+| `animation`    | `"fade"` \| `"slide"` \| `"typewriter"`                                   | `"fade"`         | Quote change animation style             |
+| `interval`     | `number`                                                                  | `4000`           | Milliseconds between quote changes       |
+| `category`     | `"motivational"` \| `"funny"` \| *your custom keys if using customQuotes* | `"motivational"` | Built-in quote category                  |
+| `customQuotes` | `{ text: string; author?: string }[]`                                     | `undefined`      | Use your own quotes (overrides category) |
+| `avatarUrl`    | `string`                                                                  | `undefined`      | Optional avatar image URL                |
+| `className`    | `string`                                                                  | `""`             | Optional custom styles                   |
+
+---
+
+## ✨ Typewriter Animation
+
+When using `animation="typewriter"`, each quote is revealed one character at a time. Once the text is fully shown, the author is typed out in a second phase with the same typing effect.
+
+Example with custom quotes:
+
+```tsx
+<QuoteLoader
+  animation="typewriter"
+  customQuotes=[
+    { text: "Discipline is the bridge between goals and accomplishment.", author: "Jim Rohn" },
+    { text: "Code is like humor. When you have to explain it, it’s bad.", author: "Cory House" }
+  ]
+/>
+```
+
+---
+
+If `customQuotes` is provided, the `category` prop will be ignored.
+
+---
+
+> Contributions, bug reports, and feature requests are welcome!
