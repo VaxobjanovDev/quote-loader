@@ -31,7 +31,7 @@ import { QuoteLoader } from 'quote-loader';
 | `customQuotes` | `{ text: string; author?: string }[]`                                     | `undefined`      | Use your own quotes (overrides category) |
 | `avatarUrl`    | `string`                                                                  | `undefined`      | Optional avatar image URL                |
 | `className`    | `string`                                                                  | `""`             | Optional custom styles                   |
-
+| `onQuotesChange` | `(quote: { text: string; author?: string }) => void`                    | `undefined`      | Callback triggered when the quote changes (for logging, analytics, etc.)   |
 ---
 
 ## ✨ Typewriter Animation
@@ -47,6 +47,20 @@ Example with custom quotes:
     { text: "Discipline is the bridge between goals and accomplishment.", author: "Jim Rohn" },
     { text: "Code is like humor. When you have to explain it, it’s bad.", author: "Cory House" }
   ]
+/>
+```
+## 🔄 Tracking Quote Changes
+
+If you want to track when the quote changes — for example, for analytics or logging — you can use the `onQuotesChange` callback.
+
+```tsx
+<QuoteLoader
+  animation="fade"
+  interval={5000}
+  onQuotesChange={(quote) => {
+    console.log('Quote changed:', quote);
+    // You can send this to analytics, or update UI state
+  }}
 />
 ```
 
