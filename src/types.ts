@@ -12,4 +12,5 @@ export interface QuoteLoaderProps {
   customQuotes?: Quote[];
   avatarUrl?: string;
   className?: string;
+  onQuotesChange?: (value: Quote) => void;
 }
