@@ -18,9 +18,11 @@ export const QuoteLoader: React.FC<QuoteLoaderProps> = ({
 
   useEffect(() => {
     const timer = setInterval(() => {
-      const quoteIndex = (index + 1) % quotes.length;
-      onQuotesChange?.(quotes[quoteIndex]);
-      setIndex(quoteIndex);
+      setIndex(prevIndex => {
+        const quoteIndex = (prevIndex + 1) % quotes.length;
+        onQuotesChange?.(quotes[quoteIndex]);
+        return quoteIndex;
+      });
     }, interval);
     return () => clearInterval(timer);
   }, [interval, onQuotesChange, quotes.length]);
