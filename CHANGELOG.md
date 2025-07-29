@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 (2025-07-27)
+## 0.0.7 (2025-07-27)
 
 * chore: Added changelog and husky for code formatting ([17b27e0](https://github.com/VaxobjanovDev/quote-loader/commit/17b27e0))
 * chore: added onQuoteChange props to manage quote change ([973062d](https://github.com/VaxobjanovDev/quote-loader/commit/973062d))
